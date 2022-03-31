@@ -4,13 +4,18 @@ from .models import Room, Message
 from django.shortcuts import render,HttpResponse
 from .models import Movie,Series,SeriesVideo
 # Create your views here.
-def home(request):
-    movies = Movie.objects.all().order_by('-uploaded')
-    return render(request,'movies/home.html',{'movies':movies})
+# def home(request):
+#     movies = Movie.objects.all().order_by('-uploaded')
+#     return render(request,'movies/home.html',{'movies':movies})
 
-def moviePage(request,slug):
-    movie = Movie.objects.get(id=slug)
-    return render(request,'movies/viewpage.html',{'movie':movie})
+# def moviePage(request,slug):
+#     movie = Movie.objects.get(id=slug)
+#     return render(request,'movies/viewpage.html',{'movie':movie})
+
+
+# def home(request):
+#     series = Series.objects.all().order_by('-uploaded')
+#     return render(request, 'series/series.html', {'series': series})
 
 def seriesHome(request):
     series = Series.objects.all().order_by('-uploaded')
