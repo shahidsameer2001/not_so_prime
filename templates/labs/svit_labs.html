@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Labs
+{% endblock title %}
+{% block labsactive %}
+active
+{% endblock labsactive %}
+
+
+{% block body %}
+<ul class="list-group bg-dark">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        A list item
+        <span class="badge bg-primary rounded-pill" style="width: 80px;height:40px;font-size: 1.3em;">easy</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        A second list item
+        <span class="badge bg-primary rounded-pill">2</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        A third list item
+        <span class="badge bg-primary rounded-pill">1</span>
+    </li>
+</ul>
+{% endblock body %}

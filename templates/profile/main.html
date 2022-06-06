@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+Profile
+{% endblock title %}
+
+
+{% block body %}
+
+<!-- profile information card -->
+<div class="card mb-3">
+    <div class="card-header">
+        <h4>Profile</h4>
+    </div>
+    <div class="card-body">
+        <p>hi {{user.last_name}} {{user.first_name}}</p>
+        <h5 class="card-title">{{ user.username }}</h5>
+        <p class="card-text">{{ user.email }}</p>
+
+    </div>
+
+    </div>
+<!-- place the button to center -->
+<div class="d-flex justify-content-center">
+    <a href="/logout" class="btn btn-primary">logout</a>
+</div>
+
+{% endblock body %}

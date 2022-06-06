@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+question
+{% endblock title %}
+
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Column
+        </div>
+        <div class="col">
+            <div data-pym-src="https://www.jdoodle.com/embed/v0/2IhG?stdin=1&arg=0">
+            </div>
+
+            <!-- This script tag contains the 
+                        javascript code in the written URL -->
+            <script>
+                var request = require('request');
+
+                var program = {
+                    script: "",
+                    language: "php",
+                    versionIndex: "0",
+                    clientId: "d3c6b9753d48c7897e3b09bbef71f1ba",
+                    clientSecret: "67276d49c58b76e54e917b0c96cd501d9fe06ab5e12d2686fc6a4dfca046bb02"
+                };
+                request({
+                    url: 'https://api.jdoodle.com/v1/execute',
+                    method: "POST",
+                    json: program
+                },
+                    function (error, response, body) {
+                        console.log('error:', error);
+                        console.log('statusCode:', response && response.statusCode);
+                        console.log('body:', body);
+                    });
+                    
+            </script>
+        </div>
+
+    </div>
+</div>
+{% endblock body %}
