@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from matplotlib.pyplot import title
 from .models import *
 from .forms import OrderForm, CreateUserForm
 # from .filters import OrderFilter
@@ -170,7 +171,8 @@ def labs(request):
 
 @login_required(login_url='login')
 def question(request):
-    return render(request, 'labs/questions.html')
+    question=Questions.objects.all()
+    return render(request, 'labs/questions.html', {'question':question})
 
 
 @login_required(login_url='login')
@@ -182,4 +184,6 @@ def profile(request):
 def wordbeater(request):
     return render(request, 'games/wordbeater.html')
 
-
+def notices(request):
+    title = NoticeBoard.objects.all().order_by('-uploaded')
+    return render(request, 'base.html', {'title': title})

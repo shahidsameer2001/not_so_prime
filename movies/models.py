@@ -59,7 +59,8 @@ class Order(models.Model):
     order_email = models.EmailField()
 
 class Questions(models.Model):
-    question = models.CharField(max_length=1000)
+    Title=models.CharField(max_length=1000)
+    question = models.CharField(max_length=100000)
     answer = models.CharField(max_length=100000)
     difficulty = models.CharField(max_length=1000)
     category = models.CharField(max_length=1000)

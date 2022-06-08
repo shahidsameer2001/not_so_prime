@@ -34,8 +34,10 @@
     function play(a){
         
         var player = document.getElementById("player")
-        player.innerHTML = "<h3 class=\"text-light\">If the video doesnt play then <a href='"+a+"'>click</a>"+ "<br>"+
-                            "<iframe src='"+a+"' width=\"auto\" height=\"auto\" allowfullscreen></iframe>  "
+        console.log(a)     
+        player.innerHTML = "<h3 class=\"text-light\">If the video doesnt play then <a href='" + a + "'>click</a>" + "<br>" +
+            '<iframe width="560" height="315" src="'+a+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+               
     }
 </script>
 

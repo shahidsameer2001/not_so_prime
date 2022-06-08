@@ -8,39 +8,57 @@ question
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col">
-            Column
+        <div class="col" id="optons">
+           
+                <select name="languages" id="languages">
+                    <option value="">Select Language</option>
+                
+                    <option value="python" id="python">python</option>
+                    <option value="java" id="java">java</option>
+                    <option value="c" id="c">c</option>
+                    <option value="cpp" id="cpp">c++</option>
+                    
+                
+                </select>
+            <div id="ques">
+                
+            </div>
+           
         </div>
         <div class="col">
-            <div data-pym-src="https://www.jdoodle.com/embed/v0/2IhG?stdin=1&arg=0">
+            <div id="compiler">
+
+            </div>
             </div>
 
-            <!-- This script tag contains the 
-                        javascript code in the written URL -->
-            <script>
-                var request = require('request');
-
-                var program = {
-                    script: "",
-                    language: "php",
-                    versionIndex: "0",
-                    clientId: "d3c6b9753d48c7897e3b09bbef71f1ba",
-                    clientSecret: "67276d49c58b76e54e917b0c96cd501d9fe06ab5e12d2686fc6a4dfca046bb02"
-                };
-                request({
-                    url: 'https://api.jdoodle.com/v1/execute',
-                    method: "POST",
-                    json: program
-                },
-                    function (error, response, body) {
-                        console.log('error:', error);
-                        console.log('statusCode:', response && response.statusCode);
-                        console.log('body:', body);
-                    });
-                    
-            </script>
         </div>
 
     </div>
 </div>
+
+{% block js %}
+<script>
+    const languages = document.getElementById('languages')
+    
+    
+
+    languages.addEventListener('change', function () {
+        const language = languages.value
+        if (language === 'python') {
+            document.getElementById('compiler').innerHTML = '<iframe src="https://trinket.io/embed/python/3d8d7ce66b?toggleCode=true" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>'
+        } 
+        else if(language=='java'){
+            document.getElementById('compiler').innerHTML = '<iframe src="https://trinket.io/embed/java/31da6af4e1?toggleCode=true" width="100%" height="536" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>'
+        }
+        else if(language=='c'){
+            document.getElementById('compiler').innerHTML = '<iframe src="" width="100%" height="356" frameborder="0" marginwidth="0" marginheight = "0" allowfullscreen ></iframe >'
+        }
+        else if(language=='cpp'){
+            document.getElementById('compiler').innerHTML = '<iframe src="" width="100%" height="356" frameborder="0" marginwidth="0" marginheight = "0" allowfullscreen ></iframe >'
+        }
+    });
+
+
+</script>
+{% endblock js %}
 {% endblock body %}
