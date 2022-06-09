@@ -130,6 +130,8 @@ def checkview(request):
     room = request.POST['room_name']
     username = request.POST['username']
 
+    print(username)
+    
     if Room.objects.filter(name=room).exists():
         return redirect('/'+room+'/?username='+username)
     else:
