@@ -1,3 +1,6 @@
+# from .forms import Recomendation
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from matplotlib.pyplot import title
@@ -43,6 +46,7 @@ def registerPage(request):
 
     context = {'form': form}
     return render(request, '../templates/register/register.html', context)
+
 
 
 # login page
@@ -187,3 +191,6 @@ def wordbeater(request):
 def notices(request):
     title = NoticeBoard.objects.all().order_by('-uploaded')
     return render(request, 'base.html', {'title': title})
+
+
+
