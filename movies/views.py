@@ -1,3 +1,6 @@
+# from .forms import Recomendation
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from matplotlib.pyplot import title
@@ -43,6 +46,7 @@ def registerPage(request):
 
     context = {'form': form}
     return render(request, '../templates/register/register.html', context)
+
 
 
 # login page
@@ -130,8 +134,6 @@ def checkview(request):
     room = request.POST['room_name']
     username = request.POST['username']
 
-    print(username)
-    
     if Room.objects.filter(name=room).exists():
         return redirect('/'+room+'/?username='+username)
     else:
@@ -168,18 +170,24 @@ def game(request):
 
 @login_required(login_url='login')
 def labs(request):
-    return render(request, 'labs/svit_labs.html')
+    que=Questions.objects.all()
+    return render(request, 'labs/svit_labs.html',{'que':que})
 
 
 @login_required(login_url='login')
 def question(request):
-    question=Questions.objects.all()
-    return render(request, 'labs/questions.html', {'question':question})
+    id = request.GET.get('id')
+    que=Questions.objects.get(id=id)
+    return render(request, 'labs/questions.html',{'que':que})
 
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request, 'profile/main.html')
+   
+    series = Series.objects.all().order_by('-uploaded')
+    
+    
+    return render(request, 'profile/main.html', {'series': series})
 
 
 @login_required(login_url='login')
@@ -189,3 +197,6 @@ def wordbeater(request):
 def notices(request):
     title = NoticeBoard.objects.all().order_by('-uploaded')
     return render(request, 'base.html', {'title': title})
+
+
+

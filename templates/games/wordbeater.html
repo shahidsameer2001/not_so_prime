@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WordBeater</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-
-<body class="bg-dark text-white">
-    <header class="bg-secondary text-center p-3 mb-5">
-        <h1>WordBeater</h1>
-    </header>
-    <div class="container text-center">
+{%extends 'base.html'%}
+{%block body%}
+    
+    <div class="container text-center text-white">
 
         <!-- Word & Input -->
         <div class="row">
@@ -47,17 +34,7 @@
                     </div>
                 </div>
 
-                <!-- Instructions -->
-                <div class="row mt-5">
-                    <div class="col-md-12">
-                        <div class="card card-body bg-secondary text-white">
-                            <h5>Instructions</h5>
-                            <p>Type each word in the given amount of seconds to score. To play again, just type the
-                                current word. Your score
-                                will reset</p>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -207,6 +184,5 @@
             }
 
     </script>
-</body>
+{%endblock body%}
 
-</html>
