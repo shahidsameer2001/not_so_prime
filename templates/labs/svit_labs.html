@@ -9,10 +9,10 @@ active
 
 {% block body %}
 <ul class="list-group bg-dark">
-    {% for i in question %}
+    {% for i in que %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <p>{{i.question}}</p>
-        <span class="badge bg-primary rounded-pill" style="width: 80px;height:40px;font-size: 1.3em;"></span>
+        <a href="http://localhost:8000/question?id={{i.id}}"><span class="badge bg-primary rounded-pill" style="width: 80px;height:40px;font-size: 1.3em;">go</span></a>
     </li>
     {% endfor %}
 </ul>

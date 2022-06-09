@@ -170,13 +170,15 @@ def game(request):
 
 @login_required(login_url='login')
 def labs(request):
-    return render(request, 'labs/svit_labs.html')
+    que=Questions.objects.all()
+    return render(request, 'labs/svit_labs.html',{'que':que})
 
 
 @login_required(login_url='login')
 def question(request):
-    question=Questions.objects.all()
-    return render(request, 'labs/questions.html', {'question':question})
+    id = request.GET.get('id')
+    que=Questions.objects.get(id=id)
+    return render(request, 'labs/questions.html',{'que':que})
 
 
 @login_required(login_url='login')
