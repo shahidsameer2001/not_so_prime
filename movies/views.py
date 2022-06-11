@@ -194,12 +194,18 @@ def profile(request):
 def wordbeater(request):
     return render(request, 'games/wordbeater.html')
 
+
+@login_required(login_url='login')
 def notices(request):
     title = NoticeBoard.objects.all().order_by('-uploaded')
     return render(request, 'base.html', {'title': title})
 
 
+@login_required(login_url='login')
 def sudoku(request):
     return render(request, 'games/sudoku.html')
+
+
+@login_required(login_url='login')
 def tic_tac_toe(request):
     return render(request, 'games/tic_tac_toe.html')
