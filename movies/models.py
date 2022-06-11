@@ -57,9 +57,9 @@ class Order(models.Model):
     order_zipcode = models.IntegerField()
     order_phone = models.IntegerField()
     order_email = models.EmailField()
-    order_comments = models.CharField(max_length=50)
 
 class Questions(models.Model):
+   
     question = models.CharField(max_length=100000)
     answer = models.CharField(max_length=100000)
     difficulty = models.CharField(max_length=1000)
@@ -69,10 +69,6 @@ class NoticeBoard(models.Model):
     notice = models.CharField(max_length=100000)
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
-
-
-
-
 
 
 

@@ -5,26 +5,88 @@ Games
 {% block gamesactive %}
 active
 {% endblock gamesactive %}
+{% block css %}
+<style>
+    .game {
+        display: flex;
 
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gameCard {
+        margin-top: 20px;
+        transition: all ease 0.5s;
+    }
+
+    .gameCard:hover {
+        transform: scale(1.1);
+    }
+
+    img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .data {}
+</style>
+{%endblock css%}
 
 
 {% block body %}
-<div class="card mb-3">
-    <img src="" class="card-img-top" alt="..." >
-    <div class="card-body">
-        <h5 class="card-title">WORD BEATER</h5>
-        <p class="card-text">This game will test your typing skills and speed.</p>
-        <a href="/wordbeater" target="_blank"><button id="myBtn" class="btn btn-primary ">Play</button></a>
+<div class="data row container ml-5">
+    <div class="col col-md-4 col-sm-6 col-xs-12 gameCard">
+        <div class="card mb-3 container mt-3 bg-dark text-white game">
+            <div class="">
+                <img src="data:image/png;base64,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"
+                    class="card-img-top" alt="...">
+            </div>
+            <div class="card-body" style="text-align:center">
+                <h5 class="card-title">WORD BEATER</h5>
+                <p class="card-text">This game will test your typing skills.</p>
+                <a href="/wordbeater" ><button id="myBtn" class="btn btn-success "
+                        style="width:220px">Play</button></a>
+            </div>
+        </div>
     </div>
+
+    <div class="col col-md-4 col-sm-6 col-xs-12 gameCard">
+        <div class="card mb-3 container mt-3 bg-dark text-white game">
+            <div class="">
+                <img src="https://store-images.s-microsoft.com/image/apps.20177.9007199266246402.7c18c93d-0b98-4bdb-8459-2bf2a69a1bbf.84b8a60e-d086-4293-a29b-f3ad993e5fab?mode=scale&q=90&h=1080&w=1920"
+                    class="card-img-top" alt="...">
+            </div>
+            <div class="card-body" style="text-align:center">
+                <h5 class="card-title">SUDOKU</h5>
+                <p class="card-text">This game will test your IQ Level.</p>
+                <a href="/sudoku" ><button id="myBtn" class="btn btn-success "
+                        style="width:220px">Play</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-4 col-sm-6 col-xs-12 gameCard">
+        <div class="card mb-3 container mt-3 bg-dark text-white game">
+            <div class="">
+                <img src="https://play-lh.googleusercontent.com/zPxLgj5nvl20ahJV7aFC6S5mD8kii5CEEDj25j1P9CYAfXL9sdDuO-8eES0r4DhJHrU"
+                    class="card-img-top" alt="...">
+            </div>
+            <div class="card-body" style="text-align:center">
+                <h5 class="card-title">TIC TAC TOE</h5>
+                <p class="card-text">This game will test your abilities.</p>
+                <a href="/tic_tac_toe"><button id="myBtn" class="btn btn-success "
+                        style="width:220px">Play</button></a>
+            </div>
+        </div>
+    </div>
+
 </div>
-<div class="card mb-3">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">WORD BEATER</h5>
-        <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-            This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-    </div>
+
 </div>
 
 {% endblock body %}

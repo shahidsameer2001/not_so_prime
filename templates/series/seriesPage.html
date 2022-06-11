@@ -4,7 +4,7 @@
 {% endblock title %}
 
 {% block body %}
-<div class="container text-light" >
+<div class="container text-light mt-4" >
     <div class="container" id="player">
         
     </div>
@@ -35,7 +35,7 @@
         
         var player = document.getElementById("player")
         console.log(a)     
-        player.innerHTML = "<h3 class=\"text-light\">If the video doesnt play then <a href='" + a + "'>click</a>" + "<br>" +
+        player.innerHTML = "<h3 class='text-light'>If the video doesnt play then <a href='" + a + "'>click</a>" + "<br>" +
             '<iframe width="560" height="315" src="'+a+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
                
     }

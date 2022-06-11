@@ -5,14 +5,30 @@ Labs
 {% block labsactive %}
 active
 {% endblock labsactive %}
-
+{% block css %}
+<style>
+    span{
+        background-color:green;
+        text-align:center;
+        
+    }
+    span:hover{
+        transform:scale(1.2)
+       
+    }
+</style>
+{% endblock css %}
 
 {% block body %}
-<ul class="list-group bg-dark">
+<ul class="list-group container">
     {% for i in que %}
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <p>{{i.question}}</p>
-        <a href="http://localhost:8000/question?id={{i.id}}"><span class="badge bg-primary rounded-pill" style="width: 80px;height:40px;font-size: 1.3em;">go</span></a>
+    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark mt-3">
+        <div class="bg-dark pl-2" style="width:100%; margin-right:10px; overflow:hidden;">
+            <p class="text-white pt-2">{{i.question}}</p>
+        </div>
+        <div>
+            <a href="http://localhost:8000/question?id={{i.id}}"><span class="badge text-white pt-2   rounded-pill " style="width: 80px;height:40px; font-size: 1.3em; transition:all ease 0.5s;">GO</span></a>
+        </div>
     </li>
     {% endfor %}
 </ul>

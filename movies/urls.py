@@ -25,6 +25,8 @@ urlpatterns = [
     path('question', views.question, name="question"),
     path('profile', views.profile, name="profile"),
     path('wordbeater', views.wordbeater, name="wordbeater"),
+    path('sudoku', views.sudoku, name="sudoku"),
+    path('tic_tac_toe', views.tic_tac_toe, name="tic_tac_toe"),
 
     # path("", views.home, name="home"),
     # path("movie/<slug>", views.moviePage, name="moviepage"),

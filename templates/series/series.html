@@ -9,38 +9,38 @@ active
 <!-- CSS only -->
 
 <style>
-    .co {
-        margin: auto;
-        max-width: 1100px;
+    .co{
+        margin:auto;
+        max-width:1100px;
     }
-
-    .card-body {
-        background: #022140;
+    .card-body{
+        background:#022140;
     }
-
-    .row {
-        margin-top: 20px;
+    .row{
+        margin-top:20px;
     }
-
-    .person-image {
-        height: 200px;
+    .person-image{
+        height:200px;
     }
-
-    .dive {
-        margin-top: 20px;
-        max-width: 25%;
-        max-height: 25;
+    .dive{
+        margin-top:20px;
+        max-width:25%; 
+        max-height:25;
     }
-
-    .dive1 {
-        align-item: center;
+    .dive1{
+        align-item:center;
     }
+    .ll{
+       
+      width:250px;
+      height:350px; 
 
-    .ll {
-
-        width: 250px;
-        height: 350px;
-
+    }
+    .logo{
+        transition:all ease 0.5s;
+    }
+    .logo:hover{
+        transform:scale(1.0)
     }
 </style>
 {% endblock css%}
@@ -50,11 +50,11 @@ active
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-white text-center">Available courses</h2>
-        </div>
-
+    </div>
+    
         {% for serie in series %}
-
-        <div class="col-md-3 mt-4 ">
+    
+        <div class="col-md-3 mt-4 allCards col-sm-6 col-xs-12 logo" >
             <div class="card mb-4 shadow-sm  shadow
             d-flex
             justify-conent-center
@@ -62,48 +62,86 @@ active
             flex-column
             ll
             ">
-                <img class="bd-placeholder-img card-img-top rounded-circle" width="215" height="215" src={{serie.image}}
-                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                <img class="bd-placeholder-img card-img-top rounded-circle" width="215" height="215"
+                    src={{serie.image}} preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
                     aria-label="Placeholder: Thumbnail">
                 </img>
-                <div class="person-name my-1">
-                    <h3 class="text-white">{{serie.name}}</h3>
-                </div>
-                <div class="btn-group ">
-                    <a href="series/{{serie.id}}">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View courses</button>
-
-                    </a>
-
-
-
-                    <button type="button" class="btn btn-sm " onclick="handlelikes({{serie.id}})" id="fav">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                        <span class="badge badge-light">{{serie.likes}}</span>
-                    </button>
-                </div>
+                    <div class="person-name my-1">
+                        <h3 class="text-white">{{serie.name}}</h3>
+                    </div>
+                    <div class="btn-group ">
+                        <a href="series/{{serie.id}}">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View courses</button>
+                          
+                        </a>
+                        
+                    
+                    
+                        <button type="button" class="btn btn-sm" name="{{serie.id}}"
+                        onclick="handlelikes({{serie.id}})" id="fav">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <span class="badge badge-light">{{serie.likes}}</span>
+                        </button>
+                    </div>
             </div>
         </div>
         {% endfor %}
-
     </div>
+</div>
+   
+    
+{% endblock body %}
+{% block js %}
+<script>
+    const likes=[];
+    const allCards=document.querySelectorAll('.allCards')
+    
+    review()
 
-
-    {% endblock body %}
-    {% block js %}
-    <script>
-
-        const getlikes = [];
-        const val = true
-        const likes = [];
-        const fav = document.getElementById('fav');
-
-        function handlelikes(id) {
-            likes.push(id);
-            localStorage.setItem('likes', JSON.stringify(likes))
-
-
-
+    function review(){
+        const ids = document.querySelectorAll("#fav")
+        const tId=[]
+        for(let i=0;i<ids.length;i++){
+            tId.push(+ids[i].name)
         }
-    </script>
-    {% endblock js %}
+        
+        const data =JSON.parse(localStorage.getItem('likes'));
+        
+       
+        data.map(d=>{
+            if(data.includes(+ids[tId.indexOf(d)].name)){
+                ids[tId.indexOf(d)].classList.add('text-danger')
+                
+            }
+        })
+       
+        
+    }
+    
+    function handlelikes(id){
+        if((localStorage.getItem("likes")==null )){
+            likes.push(id)
+            localStorage.setItem('likes',JSON.stringify(likes))
+        }
+        else{
+            var abc=JSON.parse(localStorage.getItem('likes'))
+            if(likes.length==0){
+                likes.push(...abc)
+            }
+            if(!(abc.includes(id)|| likes.includes(id))){
+                likes.push(id)
+                localStorage.setItem('likes',JSON.stringify(likes))
+            }
+            else{
+                
+                likes.splice(likes.indexOf(id),1)
+                localStorage.setItem('likes',JSON.stringify(likes))
+
+            }
+        }  
+        
+        review() 
+        window.location.reload()
+    }
+</script>
+{% endblock js %}

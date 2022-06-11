@@ -183,7 +183,11 @@ def question(request):
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request, 'profile/main.html')
+   
+    series = Series.objects.all().order_by('-uploaded')
+    
+    
+    return render(request, 'profile/main.html', {'series': series})
 
 
 @login_required(login_url='login')
@@ -195,4 +199,7 @@ def notices(request):
     return render(request, 'base.html', {'title': title})
 
 
-
+def sudoku(request):
+    return render(request, 'games/sudoku.html')
+def tic_tac_toe(request):
+    return render(request, 'games/tic_tac_toe.html')
