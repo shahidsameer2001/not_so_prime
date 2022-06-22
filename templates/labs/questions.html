@@ -13,22 +13,22 @@ question
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
-        position:absolute;
-        top:0;
-        right:15px;
-        
-        color:white;
-        outline:none;
-        
+        position: absolute;
+        top: 0;
+        right: 15px;
 
-        
+        color: white;
+        outline: none;
+
+
+
     }
-  
-    .que{
-        
-        background-color:dark;
-        height:auto;
-        position:relative;
+
+    .que {
+
+        background-color: dark;
+        height: auto;
+        position: relative;
     }
 </style>
 {% endblock css %}
@@ -42,55 +42,105 @@ question
                 <div class="">
                     <h3 style="color: white;" class="ml-3 pt-5">Hey {{user.username}}, Lets Do It 👍 </h3>
                     <p style="color: white;" class="ml-3 pt-1">{{que.question}}</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Inputs</h5>
+                                    <p class="card-text">{{que.answer1}}</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Output</h5>
+                                    <p class="card-text">{{que.answer2}}</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-           
-                <select name="languages" id="languages" class="bg-dark">
-                    <option value="">Select Language</option>
+
+            <select name="languages" id="languages" class="bg-dark">
+                <option value="">Select Language</option>
+
+                <option value="python" id="python">PYTHON</option>
+                <option value="java" id="java">JAVA</option>
                 
-                    <option value="python" id="python">PYTHON</option>
-                    <option value="java" id="java">JAVA</option>
-                    <option value="c" id="c">C</option>
-                    <option value="cpp" id="cpp">CPP</option>
-                    
-                
-                </select>
-            
-           
+
+
+            </select>
+
+
         </div>
-        <div class="col">
+        <div class="col" id="word-input">
             <div id="compiler">
 
             </div>
-            </div>
-
         </div>
 
     </div>
+
 </div>
 
+</div>
+
+
+
 {% block js %}
+
 <script>
+    
     const languages = document.getElementById('languages')
-    
-    
+
+
 
     languages.addEventListener('change', function () {
         const language = languages.value
         if (language === 'python') {
             document.getElementById('compiler').innerHTML = '<iframe src="https://trinket.io/embed/python/3d8d7ce66b?toggleCode=true" width="100%" height="526" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>'
-        } 
-        else if(language=='java'){
+        }
+        else if (language == 'java') {
             document.getElementById('compiler').innerHTML = '<iframe src="https://trinket.io/embed/java/31da6af4e1?toggleCode=true" width="100%" height="526" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>'
         }
-        else if(language=='c'){
-            document.getElementById('compiler').innerHTML = '<iframe src="" width="100%" height="526" frameborder="0" marginwidth="0" marginheight = "0" allowfullscreen ></iframe >'
-        }
-        else if(language=='cpp'){
-            document.getElementById('compiler').innerHTML = '<iframe src="" width="100%" height="526" frameborder="0" marginwidth="0" marginheight = "0" allowfullscreen ></iframe >'
-        }
+        
     });
 
+    function genScreenshot() {
+        html2canvas(document.getElementsByClassName('container'), {
+            onrendered: function (canvas) {
+                $('#box1').html("");
+                $('#box1').append(canvas);
+
+                if (navigator.userAgent.indexOf("MSIE ") > 0 ||
+                    navigator.userAgent.match(/Trident.*rv\:11\./)) {
+                    var blob = canvas.msToBlob();
+
+                    window.navigator.msSaveBlob(blob, 'Test file.png');
+
+                }
+                else {
+
+                    $('#test').attr('href', canvas.toDataURL("image/png"));
+                    doc = new jsPDF({
+                        unit: 'px',
+                        format: 'a4'
+                    });
+                    doc.addImage(canvas.toDataURL("image/png"), 'JPEG', 0, 0);
+                    doc.save('ExportFile.pdf');
+                    form.width(cache_width);
+                    //$('#test').attr('download','Test file.png');
+                    $('#test')[0].click();
+                }
+
+
+            }
+        });
+    }
 
 </script>
 {% endblock js %}

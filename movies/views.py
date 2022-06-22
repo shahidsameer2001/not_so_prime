@@ -2,10 +2,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from matplotlib.pyplot import title
 from .models import *
-from .forms import OrderForm, CreateUserForm
+from .forms import *
+
 # from .filters import OrderFilter
 from django.contrib import messages
 
@@ -15,6 +16,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import Room, Message
 from django.shortcuts import render, HttpResponse
 from .models import Movie, Series, SeriesVideo
+from django.urls import reverse
 
 
 # Create your views here.
@@ -35,18 +37,17 @@ from .models import Movie, Series, SeriesVideo
 # register
 def registerPage(request):
     form = CreateUserForm()
-
     if(request.method == "POST"):
         form = CreateUserForm(request.POST)
-        if(form.is_valid()):
+        if(form.is_valid() ):
             form.save()
             user = form.cleaned_data.get('username')
-            messages.success(request, 'Account created successfully for '+user)
+
+            
             return redirect('login')
 
     context = {'form': form}
     return render(request, '../templates/register/register.html', context)
-
 
 
 # login page
@@ -80,7 +81,8 @@ def logoutUser(request):
 @login_required(login_url='login')
 def seriesHome(request):
     series = Series.objects.all().order_by('-uploaded')
-    return render(request, 'series/series.html', {'series': series})
+    note = NoticeBoard.objects.all()
+    return render(request, 'series/series.html', {'series': series, 'note': note})
 
 
 @login_required(login_url='login')
@@ -170,23 +172,20 @@ def game(request):
 
 @login_required(login_url='login')
 def labs(request):
-    que=Questions.objects.all()
-    return render(request, 'labs/svit_labs.html',{'que':que})
+    que = Questions.objects.all()
+    return render(request, 'labs/svit_labs.html', {'que': que})
 
 
 @login_required(login_url='login')
 def question(request):
     id = request.GET.get('id')
-    que=Questions.objects.get(id=id)
-    return render(request, 'labs/questions.html',{'que':que})
+    que = Questions.objects.get(id=id)
+    return render(request, 'labs/questions.html', {'que': que})
 
 
 @login_required(login_url='login')
 def profile(request):
-   
     series = Series.objects.all().order_by('-uploaded')
-    
-    
     return render(request, 'profile/main.html', {'series': series})
 
 
@@ -195,10 +194,11 @@ def wordbeater(request):
     return render(request, 'games/wordbeater.html')
 
 
-@login_required(login_url='login')
-def notices(request):
-    title = NoticeBoard.objects.all().order_by('-uploaded')
-    return render(request, 'base.html', {'title': title})
+# @login_required(login_url='login')
+# def notice(request):
+#     id=request.GET.get('id')
+#     note = NoticeBoard.objects.get(id=id)
+#     return render(request, 'series/series.html', {'note': note})
 
 
 @login_required(login_url='login')
@@ -209,3 +209,37 @@ def sudoku(request):
 @login_required(login_url='login')
 def tic_tac_toe(request):
     return render(request, 'games/tic_tac_toe.html')
+
+
+# edit profile
+@login_required(login_url='login')
+def edit_profile(request):
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        context = {'form': form}
+        # print(context)
+        form.fields['last_login'].widget = forms.HiddenInput()
+        form.fields['password'].widget = forms.HiddenInput()
+        form.fields['is_superuser'].widget = forms.HiddenInput()
+        form.fields['groups'].widget = forms.MultipleHiddenInput()
+        form.fields['user_permissions'].widget = forms.MultipleHiddenInput()
+        form.fields['is_staff'].widget = forms.HiddenInput()
+        form.fields['is_active'].widget = forms.HiddenInput()
+        form.fields['date_joined'].widget = forms.HiddenInput()
+        form.fields['first_name'].label = 'Full_Name'
+        form.fields['last_name'].label = 'Image_Url'
+
+
+        return render(request, 'profile/edit_profile.html', context)
+
+
+@login_required(login_url='login')
+def about(request):
+    return render(request,'about.html')

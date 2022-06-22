@@ -61,7 +61,8 @@ class Order(models.Model):
 class Questions(models.Model):
    
     question = models.CharField(max_length=100000)
-    answer = models.CharField(max_length=100000)
+    answer1 = models.CharField(max_length=100000)
+    answer2 = models.CharField(max_length=100000)
     difficulty = models.CharField(max_length=1000)
     category = models.CharField(max_length=1000)
 

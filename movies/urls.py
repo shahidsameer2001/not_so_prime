@@ -24,9 +24,11 @@ urlpatterns = [
     path('labs', views.labs, name="labs"),
     path('question', views.question, name="question"),
     path('profile', views.profile, name="profile"),
+    path('profile/edit',views.edit_profile,name="edit_profile"),
     path('wordbeater', views.wordbeater, name="wordbeater"),
     path('sudoku', views.sudoku, name="sudoku"),
     path('tic_tac_toe', views.tic_tac_toe, name="tic_tac_toe"),
+    path('about',views.about,name="about")
 
     # path("", views.home, name="home"),
     # path("movie/<slug>", views.moviePage, name="moviepage"),

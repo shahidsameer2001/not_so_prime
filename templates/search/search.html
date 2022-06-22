@@ -1,61 +1,103 @@
 {% extends 'base.html' %}
 {% block title %}
-    Search
+Search
 {% endblock title %}
+{% block css%}
+<!-- CSS only -->
 
+<style>
+    .co {
+        margin: auto;
+        max-width: 1100px;
+    }
+
+    .card-body {
+        background: #022140;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+
+    .person-image {
+        height: 200px;
+    }
+
+    .dive {
+        margin-top: 20px;
+        max-width: 25%;
+        max-height: 25;
+    }
+
+    .dive1 {
+        align-item: center;
+    }
+
+    .ll {
+
+        width: 250px;
+        height: 350px;
+
+    }
+
+    .logo {
+        transition: all ease 0.5s;
+    }
+
+    .logo:hover {
+        transform: scale(1.0)
+    }
+
+    #myBtn {
+        position: absolute;
+        top: 16px;
+        left: 350px;
+
+    }
+</style>
+{% endblock css%}
 {% block body %}
-    <div class="container">
-        {% if movies|length > 0 %}
-        <h2 class="text-light">Movies</h2>
-        {% endif %}
-	<div class="row">
-        {% for movie in movies %}
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="bd-placeholder-img card-img-top" width="100%" height="225"
-                    src={{movie.image}} preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-                    aria-label="Placeholder: Thumbnail"></img>
-                <div class="card-body">
-                    <p class="card-text">{{movie.name}}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="movie/{{movie.id}}">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            </a>
-                        </div>
-                        <small class="text-muted">{{movie.uploaded}}</small>
-                    </div>
-                </div>
-            </div>
+<div class="co">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-white text-center">Available courses</h2>
+
         </div>
-        {% endfor %}
-	</div>
-        {% if  series|length > 0%}
-        <h2 class="text-light">series</h2>
-        {% endif %}
-	<div class="row">
+
         {% for serie in series %}
-          
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="bd-placeholder-img card-img-top" width="100%" height="225"
-                    src={{serie.image}} preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-                    aria-label="Placeholder: Thumbnail"></img>
-                <div class="card-body">
-                    <p class="card-text">{{serie.name}}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="/series/{{serie.id}}">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            </a>
-                        </div>
 
-                    </div>
+        <div class="col-md-3 mt-4 allCards col-sm-6 col-xs-12 logo">
+            <div class="card mb-4 shadow-sm  shadow
+            d-flex
+            justify-conent-center
+            align-items-center p-3 bg-dark rounded-lg 
+            flex-column
+            ll
+            ">
+                <img class="bd-placeholder-img card-img-top rounded-circle" width="215" height="215" src={{serie.image}}
+                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                    aria-label="Placeholder: Thumbnail">
+                </img>
+                <div class="person-name my-1">
+                    <h3 class="text-white">{{serie.name}}</h3>
+                </div>
+                <div class="btn-group ">
+                    <a href="series/{{serie.id}}">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View courses</button>
+
+                    </a>
+
+
+
+                    <button type="button" class="btn btn-sm" name="{{serie.id}}" onclick="handlelikes({{serie.id}})"
+                        id="fav">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <span class="badge badge-light">{{serie.likes}}</span>
+                    </button>
                 </div>
             </div>
         </div>
         {% endfor %}
-	</div>
-
     </div>
+</div>
 {% endblock body %}
